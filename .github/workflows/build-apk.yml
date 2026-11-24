@@ -33,9 +33,14 @@ jobs:
 
       - name: Setup Capacitor Android
         run: |
-          if [ ! -f capacitor.config.json ] && [ ! -f capacitor.config.ts ]; then
-            npx cap init "SmartLearn AI" "com.smartlearn.ai" --web-dir dist
-          fi
+          rm -f capacitor.config.ts
+          cat << 'CFG' > capacitor.config.json
+          {
+            "appId": "com.smartlearn.ai",
+            "appName": "SmartLearn AI",
+            "webDir": "dist"
+          }
+          CFG
           if [ ! -d android ]; then
             npx cap add android
           fi

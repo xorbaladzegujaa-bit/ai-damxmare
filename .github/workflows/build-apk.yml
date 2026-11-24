@@ -28,10 +28,18 @@ jobs:
         run: |
           npm install --no-audit --no-fund esbuild@^0.28.0
           npm install --no-audit --no-fund --legacy-peer-deps
+          npm install --no-audit --no-fund --legacy-peer-deps @capacitor/core @capacitor/cli @capacitor/android
           npm run build
 
-      - name: Sync Capacitor Android
-        run: npx cap sync android
+      - name: Setup Capacitor Android
+        run: |
+          if [ ! -f capacitor.config.json ] && [ ! -f capacitor.config.ts ]; then
+            npx cap init "SmartLearn AI" "com.smartlearn.ai" --web-dir dist
+          fi
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
+          npx cap sync android
 
       - name: Build Debug APK
         run: |

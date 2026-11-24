@@ -1,0 +1,6 @@
+{
+  "name": "SmartLearn AI",
+  "description": "ინტელექტუალური ქართული სასწავლო და პიროვნული განვითარების აპლიკაცია — მათემატიკა ნულიდან, ინგლისური ანბანიდან, AI მასწავლებელი, ტვინის ვარჯიში და ფსიქოლოგიური მხარდაჭერა.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

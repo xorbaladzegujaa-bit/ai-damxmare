@@ -22,16 +22,17 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Install dependencies and build web
         run: |
           npm install --no-audit --no-fund esbuild@^0.28.0
           npm install --no-audit --no-fund --legacy-peer-deps
           npm install --no-audit --no-fund --legacy-peer-deps @capacitor/core @capacitor/cli @capacitor/android
+          npm install --no-audit --no-fund --legacy-peer-deps -D @capacitor/assets
           npm run build
 
-      - name: Setup Capacitor Android
+      - name: Setup Capacitor Android and App Icon
         run: |
           rm -f capacitor.config.ts
           cat << 'CFG' > capacitor.config.json
@@ -43,6 +44,9 @@ jobs:
           CFG
           if [ ! -d android ]; then
             npx cap add android
+          fi
+          if [ -f assets/icon.png ]; then
+            npx capacitor-assets generate --android
           fi
           npx cap sync android
 
